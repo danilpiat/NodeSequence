@@ -166,10 +166,15 @@ int main()
 	NodeSequence<int> a;
 	
 
-	for (int i = 0; i < 500; i++)
+	for (int i = 0; i < 10000; i++)
 	{
 		a.addelem(rand() % 50 - rand() % 50);
 	}
+	//a.addelem(-3);
+	//a.addelem(12);
+	//a.addelem(-6);
+	//a.addelem(0);
+	//a.addelem(10);
 	/*B.insert_sort(a, a.getLength(), [](NodeSequence<int>& a, int i, int j) -> bool
 		{
 			if (a[i] < a[j])
@@ -177,13 +182,13 @@ int main()
 			else
 				return false;
 		});*/
-	/*B.bubleSort(a, a.getLength(), [](int i, int j) -> bool
-		{
-			if (i > j)
-				return true;
-			else
-				return false;
-		});*/
+	//B.bubleSort(a, a.getLength(), [](int i, int j) -> bool
+	//	{
+	//		if (i > j)
+	//			return true;
+	//		else
+	//			return false;
+	//	});
 	B.shellSort(a, a.getLength(), [](int i, int j) -> bool
 		{
 			if (i > j)
