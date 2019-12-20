@@ -40,6 +40,14 @@ void SortClass::bubleSort(Container<TElement>& array, int size, Compare comp)
 		size = k;
 	}*/
 
+	//int i, j;
+	//for (i = 0; i < size - 1; i++)
+
+	//	// Last i elements are already in place  
+	//	for (j = 0; j < size - i - 1; j++)
+	//		if (array[j] > array[j + 1])
+	//			array.swap(j, j + 1);
+
 	auto head = array.get(0);
 	while (head->next != nullptr)
 	{
@@ -51,9 +59,10 @@ void SortClass::bubleSort(Container<TElement>& array, int size, Compare comp)
 			if (comp(head->data, curHead->data))
 			{
 				auto temp = head->data;
+		
 				head->data = curHead->data;
 				curHead->data = temp;
-			
+
 			}
 			curHead = curHead->next;
 		}
@@ -75,21 +84,55 @@ void  SortClass::insert_sort(Container<TElement>& vector, int size, Compare comp
 		}
 		vector[j] = cur;
 	}*/
+
+	TElement temp;
+	for (int i = 1; i < size; i++)
+	{
+		temp = vector[i];
+		for (int j = i - 1; j >= 0; j--)
+		{
+			if (comp(vector[j], temp))
+				break;
+
+			vector[j + 1] = vector[j];
+			vector[j] = temp;
+		}
+	}
 }
 
 template<typename TElement, template <typename ...> class Container, class Compare>
 void  SortClass::shellSort(Container<TElement> &vector, int len, Compare comp)
 {
+	//int step = len / 2;
+	//while (step > 0)
+	//{
+	//	int i, j;
+	//	for (i = step; i < len; i++)
+	//	{
+	//		TElement value = vector[i];
+	//		for (j = i - step; (j >= 0) && (vector[j] > value); j -= step)
+	//			vector[j + step] = vector[j];
+	//		vector[j + step] = value;
+	//	}
+	//	step /= 2;
+	//}
 	int step = len / 2;
 	while (step > 0)
 	{
 		int i, j;
-		for (i = step; i < len; i++)
+		auto value_step = vector.get(step);
+		i = step;
+		for (; value_step != nullptr; )
 		{
-			TElement value = vector[i];
+			auto value = value_step->data;
 			for (j = i - step; (j >= 0) && (vector[j] > value); j -= step)
+			{
 				vector[j + step] = vector[j];
+			}
+				
 			vector[j + step] = value;
+			value_step = value_step->next;
+			i++;
 		}
 		step /= 2;
 	}

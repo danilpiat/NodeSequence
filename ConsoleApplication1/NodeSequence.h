@@ -9,6 +9,7 @@ struct Node
 {
 	T data;
 	struct Node<T>* next;
+	struct Node<T>* prev;
 	Node<T>(Node<T>* B);
 	Node<T>();
 };
@@ -40,13 +41,22 @@ inline void NodeSequence<T>::addelem(T number)
 	nd->data = number;
 	nd->next = nullptr;
 	if (this->head == nullptr)
+	{
 		this->head = nd;
+		this->head->prev = nullptr;
+	}
+		
 	else
 	{
 		Node<T>* current = head;
+		Node<T>* prev = head;
 		while (current->next != nullptr)
+		{
+			prev = current;
 			current = current->next;
+		}
 		current->next = nd;
+		current->prev = prev;
 	}
 	Sequence<T>::setLength(Sequence<T>::getLength() + 1);
 

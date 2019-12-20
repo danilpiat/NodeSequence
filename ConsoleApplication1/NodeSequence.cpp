@@ -20,9 +20,9 @@ void testing_sorts()
 	std::cout << "Testing bublesort on 10000 elements" << std::endl;
 	time(&start);
 	B.bubleSort(a, a.getLength(), [](const int& first, const int& second) -> bool
-		{
-			return second > first;
-		});
+	{
+		return second > first;
+	});
 	time(&end);
 	double seconds = difftime(end, start);
 	std::cout << "The time: " << seconds << " seconds" << std::endl;
@@ -34,9 +34,9 @@ void testing_sorts()
 	}
 	time(&start);
 	B.insert_sort(b, b.getLength(), [](const int& first, const int& second) -> bool
-		{
-			return second > first;
-		});
+	{
+		return second > first;
+	});
 	time(&end);
 	seconds = difftime(end, start);
 	std::cout << "The time: " << seconds << " seconds" << std::endl;
@@ -44,13 +44,13 @@ void testing_sorts()
 	std::cout << "Testing shell_sort on 10000 elements" << std::endl;
 	for (int i = 0; i < 10000; i++)
 	{
-		b.addelem(rand() % 50 - rand() % 50);
+		c.addelem(rand() % 50 - rand() % 50);
 	}
 	time(&start);
-	B.shellSort(b, b.getLength(), [](const int & first, const int & second) -> bool
-		{
-			return second > first;
-		});
+	B.shellSort(c, c.getLength(), [](const int & first, const int & second) -> bool
+	{
+		return second > first;
+	});
 	time(&end);
 	seconds = difftime(end, start);
 	std::cout << "The time: " << seconds << " seconds" << std::endl;
@@ -63,9 +63,9 @@ void testing_sorts()
 	std::cout << "Testing bubleSort on 25000 elements" << std::endl;
 	time(&start);
 	B.bubleSort(a1, a1.getLength(), [](const int& first, const int& second) -> bool
-		{
-			return second > first;
-		}); // (a1, a1.getLength(), a1.is_smaller);
+	{
+		return second > first;
+	}); 
 	time(&end);
 	seconds = difftime(end, start);
 	std::cout << "The time: " << seconds << " seconds" << std::endl;
@@ -93,13 +93,13 @@ void testing_sorts()
 		b1.addelem(rand() % 50 - rand() % 50);
 	}
 	time(&start);
-	B.shellSort(b1, b1.getLength(), [](NodeSequence<int>& a, int i, int j) -> bool
-		{
-			if (a[i] < a[j])
-				return true;
-			else
-				return false;
-		});
+	B.shellSort(b1, b1.getLength(), [](int i, int j) -> bool
+	{
+		if (i < j)
+			return true;
+		else
+			return false;
+	});
 	time(&end);
 	seconds = difftime(end, start);
 	std::cout << "The time: " << seconds << " seconds" << std::endl;
@@ -111,13 +111,13 @@ void testing_sorts()
 		a2.addelem(rand() % 50 - rand() % 50);
 	}
 	time(&start);
-	/*B.bubleSort(a2, a2.getLength(), [](NodeSequence<int>& a, int i, int j) -> bool
-		{
-			if (a[i] < a[j])
-				return true;
-			else
-				return false;
-		});*/
+	B.bubleSort(a2, a2.getLength(), [](int i, int j) -> bool
+	{
+		if (i < j)
+			return true;
+		else
+			return false;
+	});
 	time(&end);
 	seconds = difftime(end, start);
 	std::cout << "The time: " << seconds << " seconds" << std::endl;
@@ -128,13 +128,13 @@ void testing_sorts()
 		b2.addelem(rand() % 50 - rand() % 50);
 	}
 	time(&start);
-	/*B.insert_sort(b2, b2.getLength(), [](NodeSequence<int>& a, int i, int j) -> bool
-		{
-			if (a[i] < a[j])
-				return true;
-			else
-				return false;
-		});*/
+	B.insert_sort(b2, b2.getLength(), [](int i, int j) -> bool
+	{
+		if (i < j)
+			return true;
+		else
+			return false;
+	});
 	time(&end);
 	seconds = difftime(end, start);
 	std::cout << "The time: " << seconds << " seconds" << std::endl;
@@ -142,16 +142,16 @@ void testing_sorts()
 	NodeSequence<int> c2;
 	for (int i = 0; i < 50000; i++)
 	{
-		b2.addelem(rand() % 50 - rand() % 50);
+		c2.addelem(rand() % 50 - rand() % 50);
 	}
 	time(&start);
-	B.shellSort(b2, b2.getLength(), [](NodeSequence<int>& a, int i, int j) -> bool
-		{
-			if (a[i] < a[j])
-				return true;
-			else
-				return false;
-		});
+	B.shellSort(c2, c2.getLength(), [](int i, int j) -> bool
+	{
+		if (i < j)
+			return true;
+		else
+			return false;
+	});
 	time(&end);
 	seconds = difftime(end, start);
 	std::cout << "The time: " << seconds << " seconds" << std::endl;
@@ -161,10 +161,20 @@ void testing_sorts()
 //template<typename TElement>
 int main()
 {
-	testing_sorts();
+	//testing_sorts();
 	SortClass B;
 	NodeSequence<int> a;
 	
+
+	for (int i = 0; i < 10000; i++)
+	{
+		a.addelem(rand() % 50 - rand() % 50);
+	}
+	//a.addelem(-3);
+	//a.addelem(12);
+	//a.addelem(-6);
+	//a.addelem(0);
+	//a.addelem(10);
 	/*B.insert_sort(a, a.getLength(), [](NodeSequence<int>& a, int i, int j) -> bool
 		{
 			if (a[i] < a[j])
@@ -172,21 +182,21 @@ int main()
 			else
 				return false;
 		});*/
-	/*B.bubleSort(a, a.getLength(), [](NodeSequence<int>& a, int i, int j) -> bool
+	//B.bubleSort(a, a.getLength(), [](int i, int j) -> bool
+	//	{
+	//		if (i > j)
+	//			return true;
+	//		else
+	//			return false;
+	//	});
+	B.shellSort(a, a.getLength(), [](int i, int j) -> bool
 		{
-			if (a[i] > a[j])
-				return true;
-			else
-				return false;
-		});*/
-	B.shellSort(a, a.getLength(), [](NodeSequence<int>& a, int i, int j) -> bool
-		{
-			if (a[i] > a[j])
+			if (i > j)
 				return true;
 			else
 				return false;
 		});
-	std::cout << "Len : " << a.getLength() << "Full: " << a.getIsEmpty() << std::endl;
+	std::cout << "Len : " << a.getLength() << " Full: " << a.getIsEmpty() << std::endl;
 	a.printList();
 	a.deletelem(0);
 	std::cout << "IIIIIIIIIIIIIIIIIIIIIIIIII" << std::endl;
