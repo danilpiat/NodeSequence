@@ -40,7 +40,15 @@ void SortClass::bubleSort(Container<TElement>& array, int size, Compare comp)
 		size = k;
 	}*/
 
-	auto head = array.get(0);
+	int i, j;
+	for (i = 0; i < size - 1; i++)
+
+		// Last i elements are already in place  
+		for (j = 0; j < size - i - 1; j++)
+			if (array[j] > array[j + 1])
+				array.swap(j, j + 1);
+
+	/*auto head = array[0];
 	while (head->next != nullptr)
 	{
 		head = head->next;
@@ -53,11 +61,11 @@ void SortClass::bubleSort(Container<TElement>& array, int size, Compare comp)
 				auto temp = head->data;
 				head->data = curHead->data;
 				curHead->data = temp;
-			
+
 			}
 			curHead = curHead->next;
 		}
-	}
+	}*/
 }
 
 template<typename TElement, template <typename ...> class Container, class Compare>
@@ -75,6 +83,20 @@ void  SortClass::insert_sort(Container<TElement>& vector, int size, Compare comp
 		}
 		vector[j] = cur;
 	}*/
+
+	TElement temp;
+	for (int i = 1; i < size; i++)
+	{
+		temp = vector[i];
+		for (int j = i - 1; j >= 0; j--)
+		{
+			if (comp(vector[j], temp))
+				break;
+
+			vector[j + 1] = vector[j];
+			vector[j] = temp;
+		}
+	}
 }
 
 template<typename TElement, template <typename ...> class Container, class Compare>
